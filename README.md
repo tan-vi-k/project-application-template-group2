@@ -49,13 +49,15 @@ Note, you can also specify an environment variable by the same name as the confi
 
 ### Run an analysis
 Run the project from the command line using:
+```
 python run.py --feature <number>
+```
 
-where <number> corresponds to one of the implemented analyses below.
+where &lt;number&gt; corresponds to one of the implemented analyses below.
 
 ---
 ### Feature 1: Contributor Activity Analysis
-File: contributor_activity_analysis.py
+File: contributor_activity_analysis.py  
 This feature analyzes contributor participation based on the "creator" field from the dataset.
 
 Outputs:
@@ -63,12 +65,14 @@ Outputs:
 - Optionally filters by year.
 - Displays and saves a bar chart of the top 10 contributors.
 - Prints total contributors, average issues per contributor, and most active contributor.
+- Gives the option to save the visualization as a PNG file.
 
 Run Command:
 ```
 python run.py --feature 1
-
+```
 Sample Output:
+```
 Loaded 661 issues from data/poetry_issues.json.
 Detected years in dataset: 2018, 2019, 2020, 2021, 2022, 2023, 2024
 
@@ -92,23 +96,42 @@ Issue data range: 2018-06-12 → 2018-12-06
 ----------------------------------------
 ```
 ---
-###Feature 2: Reopened vs Closed Issue Ratio Analysis
-File: reopened_closed_ratio_analysis.py
-This feature evaluates project maintainability and issue resolution effectiveness by comparing reopened vs closed issues.
+### Feature 2: Reopened vs Closed Issue Ratio Analysis
+File: reopened_closed_ratio_analysis.py  
+This analysis focuses on understanding how effectively issues are resolved and how often they need to be reopened.  
+By examining the ratio of reopened to closed issues, we can monitor the overall stability and maintainability of the project.
 
 Outputs:
--Calculates the ratio of reopened to closed issues per year.
--Visualizes trends over time in a bar chart.
--Prints summary metrics showing closure consistency and stability.
+- Filters issues within a specified date range.
+- Counts and compares the number of closed, reopened, and open issues.
+- Calculates the reopened-to-closed ratio to highlight trends in resolution quality.
+- Generates a pie chart showing the distribution of issue statuses.
+- Gives the option to save the visualization as a PNG file.
 
 Run Command:
+```
 python run.py --feature 2
-
+```
 Sample Output:
+```
+Enter start date (YYYY-MM-DD) or press Enter to skip: 2024-01-01
+Enter end date (YYYY-MM-DD) or press Enter to skip: 2025-01-01
 
+Issue Status Summary
+----------------------------------------
+Closed: 296 issues (74.56%)
+Open: 95 issues (23.93%)
+Reopened: 6 issues (1.51%)
+
+Issue data range: 2024-01-01 → 2024-10-20
+----------------------------------------
+
+Do you want to save this chart as a PNG file? (y/n): y
+Chart saved as 'issue_status_chart.png'.
+```
 ---
 ### Feature 3: Issue Creation Trend Analysis
-File: issue_creation_trend_analysis.py
+File: issue_creation_trend_analysis.py  
 This feature analyzes how issue creation volume changes over time.
 
 Outputs:
@@ -121,9 +144,9 @@ Outputs:
 Run Command:
 ```
 python run.py --feature 3
-
+```
 Sample Output:
-
+```
 Loaded 5573 issues from data/poetry_issues_all.json.
 
 Enter a year to filter by (or press Enter to analyze all years): 2024
@@ -145,9 +168,9 @@ Do you want to save the chart? (y/n): y
 Chart saved successfully as 'output/charts/issue_analysis_2024_20251102_3917.png'
 ```
 ---
-##VSCode Configuration
-To simplify development and debugging:
-.vscode/launch.json – Provides preconfigured run/debug options for each analysis.
+### VSCode Configuration
+To simplify development and debugging:  
+.vscode/launch.json – Provides preconfigured run/debug options for each analysis.  
 .vscode/settings.json – Adjusts formatting and interface preferences for better navigation.
 
 You can run and debug individual features directly from VSCode’s Run and Debug panel.
