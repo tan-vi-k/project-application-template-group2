@@ -15,6 +15,7 @@ class ContributorActivityAnalysis:
     - Counts how many issues each contributor created.
     - Optionally filters by year.
     - Displays and saves a bar chart of the top contributors.
+    - Each run saves a uniquely named output chart (not overwritten).
     """
 
     def __init__(self):
@@ -74,7 +75,6 @@ class ContributorActivityAnalysis:
         else:
             print("Detected years in dataset: None found")
 
-
         # --- Year filter ---
         year_input = input("\nEnter a year to filter by (or press Enter to analyze all years): ").strip()
         year_filter = int(year_input) if year_input else None
@@ -107,9 +107,14 @@ class ContributorActivityAnalysis:
         plt.ylabel("Number of Issues Created")
         plt.xticks(rotation=45, ha="right")
         plt.grid(axis="y", linestyle="--", alpha=0.5)
-
-        chart_path = "output/charts/contributor_activity.png"
         plt.tight_layout()
+
+        # --- Unique file naming ---
+        timestamp = datetime.now().strftime("%Y%m%d-%H%M%S")
+        year_label = str(year_filter) if year_filter else "all"
+        chart_filename = f"contributor_activity_{year_label}_{timestamp}.png"
+        chart_path = os.path.join("output/charts", chart_filename)
+
         plt.savefig(chart_path, bbox_inches="tight")
         plt.show()
 
@@ -124,8 +129,18 @@ class ContributorActivityAnalysis:
         print(f"Total issues created: {total_issues}")
         print(f"Average issues per contributor: {avg_issues:.2f}")
 
-        # Safe access even if empty
         if not summary.empty:
             top_user = summary.iloc[0]
             print(f"Most active contributor: {top_user['user']} ({int(top_user['issue_count'])} issues)")
 
+        if not df.empty:
+            first_date = df["created_date"].min().strftime("%Y-%m-%d")
+            last_date = df["created_date"].max().strftime("%Y-%m-%d")
+            print(f"Issue data range: {first_date} → {last_date}")
+
+        print(f"Chart saved to: {chart_path}")
+        print("-" * 40)
+
+
+if __name__ == "__main__":
+    ContributorActivityAnalysis().run()
