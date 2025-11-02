@@ -24,7 +24,7 @@ class ContributorActivityAnalysis:
         issues: List[Issue] = DataLoader().get_issues()
 
         if not issues:
-            print("\n⚠️ No issues found in dataset.\n")
+            print("\n No issues found in dataset.\n")
             return
 
         records = []
@@ -39,7 +39,7 @@ class ContributorActivityAnalysis:
                 })
 
         if not records:
-            print("\n⚠️ No contributor usernames found in dataset.\n")
+            print("\n No contributor usernames found in dataset.\n")
             return
 
         df = pd.DataFrame.from_records(records)
@@ -63,7 +63,7 @@ class ContributorActivityAnalysis:
         df = df.dropna(subset=["created_date"])
 
         if df.empty:
-            print("\n⚠️ No valid created_date entries after normalization. Please verify dataset format.\n")
+            print("\n No valid created_date entries after normalization. Please verify dataset format.\n")
             print("Example raw value from dataset:", getattr(issues[0], "created_date", None))
             return
 
@@ -93,7 +93,7 @@ class ContributorActivityAnalysis:
         summary = summary.sort_values("issue_count", ascending=False).head(10)
 
         if summary.empty:
-            print("\n⚠️ No contributor data to visualize.\n")
+            print("\n No contributor data to visualize.\n")
             return
 
         # --- Visualization ---
