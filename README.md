@@ -54,17 +54,18 @@ python run.py --feature <number>
 where <number> corresponds to one of the implemented analyses below.
 
 ---
-###Feature 1: Contributor Activity Analysis
+### Feature 1: Contributor Activity Analysis
 File: contributor_activity_analysis.py
 This feature analyzes contributor participation based on the "creator" field from the dataset.
 
 Outputs:
--Counts the number of issues created by each contributor.
--Optionally filters by year.
--Displays and saves a bar chart of the top 10 contributors.
--Prints total contributors, average issues per contributor, and most active contributor.
+- Counts the number of issues created by each contributor.
+- Optionally filters by year.
+- Displays and saves a bar chart of the top 10 contributors.
+- Prints total contributors, average issues per contributor, and most active contributor.
 
 Run Command:
+```
 python run.py --feature 1
 
 Sample Output:
@@ -89,7 +90,7 @@ Average issues per contributor: 1.00
 Most active contributor: daisylb (1 issues)
 Issue data range: 2018-06-12 → 2018-12-06
 ----------------------------------------
-
+```
 ---
 ###Feature 2: Reopened vs Closed Issue Ratio Analysis
 File: reopened_closed_ratio_analysis.py
@@ -106,21 +107,43 @@ python run.py --feature 2
 Sample Output:
 
 ---
-###Feature 3: Issue Creation Trend Analysis
+### Feature 3: Issue Creation Trend Analysis
 File: issue_creation_trend_analysis.py
 This feature analyzes how issue creation volume changes over time.
 
 Outputs:
--Displays monthly trends for a given year or yearly trends overall.
--Calculates total and average number of issues.
--Shows the most active month/year.
--Generates and displays a line or bar chart of issue creation activity.
+- Displays monthly trends for a selected year or yearly trends for all data.
+- Calculates total and average number of issues.
+- Identifies the most active month or year.
+- Generates a line or bar chart showing issue creation activity.
+- Optionally saves the chart to output/charts with a timestamped filename.
 
 Run Command:
+```
 python run.py --feature 3
 
 Sample Output:
 
+Loaded 5573 issues from data/poetry_issues_all.json.
+
+Enter a year to filter by (or press Enter to analyze all years): 2024
+
+Showing monthly issue trend for year 2024
+
+
+Summary for 2024
+----------------------------------------
+Total issues created: 455
+Average issues per month: 45.50
+Number of months with issue activity: 10
+Most active month: February (71 issues)
+Issue data range: 2024-01-01 → 2024-10-20
+----------------------------------------
+
+Do you want to save the chart? (y/n): y
+
+Chart saved successfully as 'output/charts/issue_analysis_2024_20251102_3917.png'
+```
 ---
 ##VSCode Configuration
 To simplify development and debugging:
