@@ -1,3 +1,4 @@
+import config
 from typing import List
 import matplotlib.pyplot as plt
 import pandas as pd
@@ -18,7 +19,8 @@ class ContributorActivityAnalysis:
     """
 
     def __init__(self):
-        os.makedirs("output/charts", exist_ok=True)
+        self.output_dir = config.get_parameter('output_dir')
+
 
     def run(self):
         issues: List[Issue] = DataLoader().get_issues()
@@ -111,10 +113,11 @@ class ContributorActivityAnalysis:
         # --- Ask user if they want to save ---
         save_choice = input("\nWould you like to save this chart? (Y/N): ").strip().lower()
         if save_choice == "y":
+            os.makedirs(self.output_dir, exist_ok=True)
             timestamp = datetime.now().strftime("%Y%m%d-%H%M%S")
             year_label = str(year_filter) if year_filter else "all"
             chart_filename = f"contributor_activity_{year_label}_{timestamp}.png"
-            chart_path = os.path.join("output/charts", chart_filename)
+            chart_path = os.path.join(self.output_dir, chart_filename)
             plt.savefig(chart_path, bbox_inches="tight")
             print(f"\n Chart saved to: {chart_path}\n")
         else:
