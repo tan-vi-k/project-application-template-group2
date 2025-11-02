@@ -14,8 +14,7 @@ class ContributorActivityAnalysis:
     - Uses the 'creator' field (string username) from the dataset.
     - Counts how many issues each contributor created.
     - Optionally filters by year.
-    - Displays and saves a bar chart of the top contributors.
-    - Each run saves a uniquely named output chart (not overwritten).
+    - Displays the chart and optionally saves it with a unique name.
     """
 
     def __init__(self):
@@ -109,13 +108,18 @@ class ContributorActivityAnalysis:
         plt.grid(axis="y", linestyle="--", alpha=0.5)
         plt.tight_layout()
 
-        # --- Unique file naming ---
-        timestamp = datetime.now().strftime("%Y%m%d-%H%M%S")
-        year_label = str(year_filter) if year_filter else "all"
-        chart_filename = f"contributor_activity_{year_label}_{timestamp}.png"
-        chart_path = os.path.join("output/charts", chart_filename)
+        # --- Ask user if they want to save ---
+        save_choice = input("\nWould you like to save this chart? (Y/N): ").strip().lower()
+        if save_choice == "y":
+            timestamp = datetime.now().strftime("%Y%m%d-%H%M%S")
+            year_label = str(year_filter) if year_filter else "all"
+            chart_filename = f"contributor_activity_{year_label}_{timestamp}.png"
+            chart_path = os.path.join("output/charts", chart_filename)
+            plt.savefig(chart_path, bbox_inches="tight")
+            print(f"\n Chart saved to: {chart_path}\n")
+        else:
+            print("\n Chart not saved. Displaying only.\n")
 
-        plt.savefig(chart_path, bbox_inches="tight")
         plt.show()
 
         # --- Summary ---
@@ -137,8 +141,6 @@ class ContributorActivityAnalysis:
             first_date = df["created_date"].min().strftime("%Y-%m-%d")
             last_date = df["created_date"].max().strftime("%Y-%m-%d")
             print(f"Issue data range: {first_date} → {last_date}")
-
-        print(f"Chart saved to: {chart_path}")
         print("-" * 40)
 
 
