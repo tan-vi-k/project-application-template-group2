@@ -83,7 +83,7 @@ Showing contributor activity for year 2018
 
 Would you like to save this chart? (Y/N): y
 
-✅ Chart saved to: output/charts/contributor_activity_2018_20251102-112808.png
+Chart saved to: output/charts/contributor_activity_2018_20251102-112808.png
 
 
 Contributor Activity Summary
