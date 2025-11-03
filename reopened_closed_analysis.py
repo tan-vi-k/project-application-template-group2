@@ -73,7 +73,7 @@ class ReopenedClosedAnalysis:
             filename = f"issue_status_chart_{timestamp}.png"
             file_path = os.path.join(self.output_dir, filename)
             plt.savefig(file_path, dpi=300)
-            print(f"✅ Chart saved to: {file_path}")
+            print(f"Chart saved to: {file_path}")
         else:
             print("Chart not saved. Displaying instead...")
 
