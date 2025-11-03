@@ -9,6 +9,9 @@ import argparse
 
 import config
 from example_analysis import ExampleAnalysis
+from contributor_activity_analysis import ContributorActivityAnalysis
+from reopened_closed_analysis import ReopenedClosedAnalysis
+from issue_creation_trend_analysis import IssueCreationTrendAnalysis
 
 
 def parse_args():
@@ -48,10 +51,10 @@ config.overwrite_from_args(args)
 if args.feature == 0:
     ExampleAnalysis().run()
 elif args.feature == 1:
-    pass # TODO call first analysis
+    ContributorActivityAnalysis().run()
 elif args.feature == 2:
-    pass # TODO call second analysis
+    ReopenedClosedAnalysis().run()
 elif args.feature == 3:
-    pass # TODO call third analysis
+    IssueCreationTrendAnalysis().run()
 else:
     print('Need to specify which feature to run with --feature flag.')
