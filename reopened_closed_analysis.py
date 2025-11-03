@@ -13,7 +13,7 @@ class ReopenedClosedAnalysis:
         # Ensure output directory exists
         os.makedirs(self.output_dir, exist_ok=True)
 
-    def analyze(self):
+    def run(self):
         all_issues = DataLoader().get_issues()
         print(f"Loaded {len(all_issues)} issues from dataset.")
 
@@ -81,4 +81,4 @@ class ReopenedClosedAnalysis:
 
 
 if __name__ == '__main__':
-    ReopenedClosedAnalysis().analyze()
+    ReopenedClosedAnalysis().run()
