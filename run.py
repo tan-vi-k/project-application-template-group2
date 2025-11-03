@@ -9,6 +9,7 @@ import argparse
 
 import config
 from example_analysis import ExampleAnalysis
+from reopened_closed_analysis import ReopenedClosedAnalysis
 from issue_creation_trend_analysis import IssueCreationTrendAnalysis
 
 
@@ -49,7 +50,7 @@ config.overwrite_from_args(args)
 if args.feature == 0:
     ExampleAnalysis().run()
 elif args.feature == 1:
-    pass # TODO call first analysis
+    ReopenedClosedAnalysis().run()
 elif args.feature == 2:
     IssueCreationTrendAnalysis().run()
 elif args.feature == 3:
