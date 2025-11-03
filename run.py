@@ -10,7 +10,7 @@ import argparse
 import config
 from example_analysis import ExampleAnalysis
 from contributor_activity_analysis import ContributorActivityAnalysis
-from reopened_closed_analysis import ReopenedClosedRatioAnalysis
+from reopened_closed_analysis import ReopenedClosedAnalysis
 from issue_creation_trend_analysis import IssueCreationTrendAnalysis
 
 
@@ -53,7 +53,7 @@ if args.feature == 0:
 elif args.feature == 1:
     ContributorActivityAnalysis().run()
 elif args.feature == 2:
-    ReopenedClosedRatioAnalysis().run()
+    ReopenedClosedAnalysis().run()
 elif args.feature == 3:
     IssueCreationTrendAnalysis().run()
 else:
